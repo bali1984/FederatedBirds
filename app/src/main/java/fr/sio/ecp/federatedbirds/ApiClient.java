@@ -28,7 +28,7 @@ public class ApiClient {
 
     // The API base URL
     // TODO: Replace by a mechanism to read the API base from the Shared Preferences
-    private static final String API_BASE = "http://10.0.2.2:8080/";
+    private static final String API_BASE = "https://federatedbirds.appspot.com/";
 
     // A singleton instance
     private static ApiClient mInstance;

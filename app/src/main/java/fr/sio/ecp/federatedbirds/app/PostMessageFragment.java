@@ -8,20 +8,20 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.app.AlertDialog;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.os.AsyncTaskCompat;
-import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
+import android.view.LayoutInflater;
 
 import java.io.IOException;
 
 import fr.sio.ecp.federatedbirds.ApiClient;
 import fr.sio.ecp.federatedbirds.R;
-import fr.sio.ecp.federatedbirds.auth.TokenManager;
 import fr.sio.ecp.federatedbirds.model.Message;
 
 /**
@@ -35,7 +35,7 @@ public class PostMessageFragment extends DialogFragment {
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
 
-        View v = getLayoutInflater(savedInstanceState).inflate(R.layout.post_message, null);
+        View v = LayoutInflater.from(getContext()).inflate(R.layout.post_message, null);
         mMessageText = (EditText) v.findViewById(R.id.message);
 
         Dialog dialog = new AlertDialog.Builder(getContext())
@@ -46,7 +46,7 @@ public class PostMessageFragment extends DialogFragment {
                     public void onClick(DialogInterface dialog, int which) {
 
                         String message = mMessageText.getText().toString();
-                        if (!TextUtils.isEmpty(message)) {
+                        if (TextUtils.isEmpty(message)) {
                             Toast.makeText(getContext(), R.string.empty_message_error, Toast.LENGTH_LONG).show();
                             return;
                         }
@@ -65,6 +65,7 @@ public class PostMessageFragment extends DialogFragment {
                 .create();
         return dialog;
     }
+
 
     /**
      * Created by Michaël on 30/11/2015.

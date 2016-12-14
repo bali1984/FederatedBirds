@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">FederatedBirds</string>
     <string name="hello">Hello world</string>
+    <string name="registration_success">Enregistrement réussi</string>
     <string name="login">Connexion</string>
     <string name="registerNewAcc">S\'enregistrer</string>
     <string name="validateRegistration">S\'enregistrer</string>
@@ -14,17 +15,24 @@
     <string name="open_menu">Ouvrir le menu</string>
     <string name="close_menu">Fermer le menu</string>
     <string name="logout">Déconnexion</string>
-    <string name="login_progress">Connexion en cours...</string>
-    <string name="register_progress">Enregistrement en cours...</string>
+    <string name="login_progress">Connexion en cours</string>
+    <string name="register_progress">Enregistrement en cours</string>
     <string name="followed">Abonnements</string>
+    <string name="followers">Abonnés</string>
     <string name="new_message">Nouveau message</string>
     <string name="post">Poster</string>
     <string name="empty_message_error">Message vide non posté.</string>
-    <string name="progress">En cours...</string>
+    <string name="progress">En cours</string>
     <string name="post_failed">Le post a échoué.</string>
     <string name="textView">Choisir un login</string>
-    <string name="textView2">Choisir un mot de passe</string>
-    <string name="textView3">Re-saisir le mot de passe</string>
-    <string name="accepter_conditions">J\'accèpte les conditions d\'utilisations</string>
+    <string name="textView2">Saisir un mot de passe</string>
+    <string name="textView3">Saisir email</string>
+    <string name="email">Email</string>
+    <string name="unfollow">UF</string>
+    <string name="follow">F</string>
+    <string name="follow_ok">FO</string>
+    <string name="unfollow_ok">UO</string>
+    <string name="accepter_conditions">N/A</string>
+
 
 </resources>

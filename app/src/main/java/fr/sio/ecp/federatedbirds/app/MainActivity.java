@@ -48,12 +48,23 @@ public class MainActivity extends AppCompatActivity {
                                 .replace(R.id.main_container, fragment)
                                 .commit();
                         return true;
+
                     case R.id.followed:
-                        fragment = new UserFollowedFragment();
+                        UserFollowedFragment followed = new UserFollowedFragment();
+                        followed.setArguments("followed");
                         getSupportFragmentManager().beginTransaction()
-                                .replace(R.id.main_container, fragment)
+                                .replace(R.id.main_container, followed)
                                 .commit();
                         return true;
+
+                    case R.id.followers:
+                        UserFollowedFragment followers = new UserFollowedFragment();
+                        followers.setArguments("followers");
+                        getSupportFragmentManager().beginTransaction()
+                                .replace(R.id.main_container, followers)
+                                .commit();
+                        return true;
+
                     case R.id.settings:
                         Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
                         startActivity(intent);

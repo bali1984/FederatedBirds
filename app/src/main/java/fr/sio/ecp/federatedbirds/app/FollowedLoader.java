@@ -13,13 +13,31 @@ import fr.sio.ecp.federatedbirds.model.User;
  */
 public class FollowedLoader extends UsersLoader {
 
-    public FollowedLoader(Context context, Long userId) {
+    private String mTypeFollow;
+
+    public FollowedLoader(Context context, Long userId, String typeFollow) {
         super(context, userId);
+        mTypeFollow = typeFollow;
     }
 
     @Override
     protected List<User> getUsers(Long userId) throws IOException {
-        return ApiClient.getInstance(getContext()).getUserFollowed(userId);
+        if (mTypeFollow.equals("followed")) {
+            return ApiClient.getInstance(getContext()).getUserFollowed(userId);
+        }
+        else if (mTypeFollow.equals("followers")) {
+            return ApiClient.getInstance(getContext()).getUserFollowers(userId);
+        }
+        else return null;
     }
+
+
+
+
+
+
+
+
+
 
 }

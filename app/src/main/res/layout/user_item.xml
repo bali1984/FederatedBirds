@@ -19,4 +19,19 @@
         android:layout_height="match_parent"
         android:layout_weight="1"/>
 
+    <Button
+        android:text="@string/follow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/follow"
+        android:layout_weight="1" />
+
+    <Button
+        android:text="@string/unfollow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/unfollow"
+        android:layout_weight="1" />
+
+
 </LinearLayout>

@@ -28,35 +28,35 @@ public class RegisterActivity extends AppCompatActivity {
         // Get form views
         EditText usernameText = (EditText) findViewById(R.id.usernameNew);
         EditText passwordText = (EditText) findViewById(R.id.passwordNew);
-        EditText passwordTextCheck = (EditText) findViewById(R.id.passwordCheck);
+        EditText emailText = (EditText) findViewById(R.id.emailNew);
 
         String login = usernameText.getText().toString();
         String password = passwordText.getText().toString();
-        String passwordCheck = passwordTextCheck.getText().toString();
+        String email = emailText.getText().toString();
 
-        if (!ValidationUtils.validateLogin(login)) {
+
+
+        if (!(ValidationUtils.validateLogin(login))){
             usernameText.setError(getString(R.string.invalid_format));
             usernameText.requestFocus();
             return;
         }
 
-        if (!ValidationUtils.validatePassword(password)) {
+        if (!(ValidationUtils.validatePassword(password))) {
             passwordText.setError(getString(R.string.invalid_format));
             passwordText.requestFocus();
             return;
         }
 
-        boolean correct = passwordTextCheck.equals(passwordText);
-        if (!correct) {
-            passwordText.setError(getString(R.string.invalid_password_check));
-            passwordText.requestFocus();
+        if (!(ValidationUtils.validateEmail(email))) {
+            emailText.setError(getString(R.string.invalid_format));
+            emailText.requestFocus();
             return;
         }
 
-
-        LoginTaskFragment taskFragment = new LoginTaskFragment();
-        taskFragment.setArguments(login, password);
-        taskFragment.show(getSupportFragmentManager(), "login_task");
+        RegisterTaskFragment taskFragment = new RegisterTaskFragment();
+        taskFragment.setArguments(login, password, email);
+        taskFragment.show(getSupportFragmentManager(), "register_task");
 
     }
 

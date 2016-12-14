@@ -27,6 +27,13 @@ public class UserFollowedFragment extends Fragment implements LoaderManager.Load
 
     private UsersAdapter mUsersAdapter;
 
+
+    public void setArguments(String typeFollow) {
+        Bundle args = new Bundle();
+        args.putString("typeFollow", typeFollow);
+        setArguments(args);
+    }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -59,7 +66,7 @@ public class UserFollowedFragment extends Fragment implements LoaderManager.Load
 
     @Override
     public Loader<List<User>> onCreateLoader(int id, Bundle args) {
-        return new FollowedLoader(getContext(), null);
+        return new FollowedLoader(getContext(), null, getArguments().getString("typeFollow"));
     }
 
     @Override

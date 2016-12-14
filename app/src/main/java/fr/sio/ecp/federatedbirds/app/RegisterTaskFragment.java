@@ -2,20 +2,13 @@ package fr.sio.ecp.federatedbirds.app;
 
 import android.app.Dialog;
 import android.app.ProgressDialog;
-import android.content.Context;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
-import android.support.v4.app.Fragment;
 import android.support.v4.os.AsyncTaskCompat;
 import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.IOException;
@@ -30,16 +23,17 @@ import fr.sio.ecp.federatedbirds.auth.TokenManager;
 
 public class RegisterTaskFragment extends DialogFragment {
 
-        private static final String ARG_LOGIN_NEW = "usernameNew";
-        private static final String ARG_PASSWORD_NEW = "passwordNew";
-        private static final String ARG_PASSWORD_CHECK = "passwordCheck";
+      private static final String ARG_LOGIN = "login";
+      private static final String ARG_PASSWORD = "password";
+      private static final String ARG_EMAIL = "email";
 
-        public void setArguments(String login, String password, String passwordCheck) {
+        public void setArguments(String login, String password, String email) {
             Bundle args = new Bundle();
-            args.putString(fr.sio.ecp.federatedbirds.app.RegisterTaskFragment.ARG_LOGIN_NEW, login);
-            args.putString(fr.sio.ecp.federatedbirds.app.RegisterTaskFragment.ARG_PASSWORD_NEW, password);
-            args.putString(fr.sio.ecp.federatedbirds.app.RegisterTaskFragment.ARG_PASSWORD_CHECK, passwordCheck);
+            args.putString(RegisterTaskFragment.ARG_LOGIN, login);
+            args.putString(RegisterTaskFragment.ARG_PASSWORD, password);
+            args.putString(RegisterTaskFragment.ARG_EMAIL, email);
             setArguments(args);
+
         }
 
         @Override
@@ -47,7 +41,7 @@ public class RegisterTaskFragment extends DialogFragment {
             super.onCreate(savedInstanceState);
             setRetainInstance(true);
             AsyncTaskCompat.executeParallel(
-                    new fr.sio.ecp.federatedbirds.app.RegisterTaskFragment.RegisterTask()
+                    new RegisterTask()
             );
         }
 
@@ -65,16 +59,27 @@ public class RegisterTaskFragment extends DialogFragment {
             @Override
             protected String doInBackground(Void... params) {
                 try {
-                    String login = getArguments().getString("usernameNew");
-                    String password = getArguments().getString("passwordNew");
-                    String passwordCheck = getArguments().getString("passwordCheck");
-                    return ApiClient.getInstance(getContext()).registerNewAcc(login, password, passwordCheck);
+                    String login = getArguments().getString("login");
+                    String password = getArguments().getString("password");
+                    String email = getArguments().getString("email");
+                    return ApiClient.getInstance(getContext()).addUser(login, password, email);
                 } catch (IOException e) {
                     Log.e(RegisterActivity.class.getSimpleName(), "Registration failed", e);
                     return null;
                 }
             }
+/*
+            @Override
+            protected void onPostExecute(String user) {
+                if (user != null) {
+                    Toast.makeText(getContext(), R.string.registration_success, Toast.LENGTH_SHORT).show();
+                }  else {
+                    Toast.makeText(getContext(), R.string.login_failed, Toast.LENGTH_SHORT).show();
+                }
+                dismiss();
+            }
 
+*/
             @Override
             protected void onPostExecute(String token) {
                 if (token != null) {
@@ -87,4 +92,4 @@ public class RegisterTaskFragment extends DialogFragment {
                 dismiss();
             }
         }
-    }
+}

@@ -21,6 +21,12 @@ public class LoginActivity extends AppCompatActivity {
                 login();
             }
         });
+        findViewById(R.id.registerNewAcc).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                register();
+            }
+        });
 
     }
 
@@ -48,6 +54,13 @@ public class LoginActivity extends AppCompatActivity {
         LoginTaskFragment taskFragment = new LoginTaskFragment();
         taskFragment.setArguments(login, password);
         taskFragment.show(getSupportFragmentManager(), "login_task");
+
+    }
+
+    private void register() {
+
+        RegisterTaskFragment taskFragment = new RegisterTaskFragment();
+        taskFragment.show(getSupportFragmentManager(), "register_task");
 
     }
 

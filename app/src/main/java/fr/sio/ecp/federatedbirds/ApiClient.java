@@ -121,6 +121,14 @@ public class ApiClient {
         return post("auth/token", body, String.class);
     }
 
+    public String registerNewAcc(String login, String password, String passwordCheck) throws IOException {
+        JsonObject body = new JsonObject();
+        body.addProperty("login", login);
+        body.addProperty("passwordNew", password);
+        body.addProperty("passwordCheck", passwordCheck);
+        return post("auth/token", body, String.class);
+    }
+
     public Message postMessage(String text) throws IOException {
         Message message = new Message();
         message.text = text;

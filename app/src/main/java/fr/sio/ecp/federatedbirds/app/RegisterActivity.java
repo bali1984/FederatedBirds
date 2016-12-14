@@ -15,22 +15,24 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        findViewById(R.id.login).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.validateRegistration).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                register();
+                validateRegistration();
             }
         });
     }
 
-    private void register() {
+    private void validateRegistration() {
 
         // Get form views
-        EditText usernameText = (EditText) findViewById(R.id.username);
-        EditText passwordText = (EditText) findViewById(R.id.password);
+        EditText usernameText = (EditText) findViewById(R.id.usernameNew);
+        EditText passwordText = (EditText) findViewById(R.id.passwordNew);
+        EditText passwordTextCheck = (EditText) findViewById(R.id.passwordCheck);
 
         String login = usernameText.getText().toString();
         String password = passwordText.getText().toString();
+        String passwordCheck = passwordTextCheck.getText().toString();
 
         if (!ValidationUtils.validateLogin(login)) {
             usernameText.setError(getString(R.string.invalid_format));
@@ -43,6 +45,14 @@ public class RegisterActivity extends AppCompatActivity {
             passwordText.requestFocus();
             return;
         }
+
+        boolean correct = passwordTextCheck.equals(passwordText);
+        if (!correct) {
+            passwordText.setError(getString(R.string.invalid_password_check));
+            passwordText.requestFocus();
+            return;
+        }
+
 
         LoginTaskFragment taskFragment = new LoginTaskFragment();
         taskFragment.setArguments(login, password);

@@ -63,12 +63,12 @@ public class ApiClient {
      * @param method The HTTP method to use
      * @param path The relative path to call
      * @param body An object that will sent as JSON in the request body (must be null for a GET request)
-     * @param responseType The type of the response, to be parsed from JSON
+     * @param type The type of the response, to be parsed from JSON
      * @param <T> The generic type of the response
      * @return The response to the request, parsed from JSON
      * @throws IOException is something goes wrong
      */
-    private <T> T method(String method, String path, Object body, Type responseType) throws IOException {
+    private <T> T method(String method, String path, Object body, Type type) throws IOException {
         String url = API_BASE + path;
         HttpURLConnection connection = (HttpURLConnection) new URL(url).openConnection();
         // At this point we have opened a connection to the URL, we can send headers
@@ -90,7 +90,7 @@ public class ApiClient {
         // Write the request body with Gson library
         Reader reader = new InputStreamReader(connection.getInputStream());
         try {
-            return new Gson().fromJson(reader, responseType);
+            return new Gson().fromJson(reader, type);
         } finally {
             reader.close();
         }
@@ -110,12 +110,14 @@ public class ApiClient {
         String id = userId != null ? Long.toString(userId) : "me";
         TypeToken<List<User>> type = new TypeToken<List<User>>() {};
         return get("users/" + id + "/followed", type.getType());
+        //return get("users", type.getType());
     }
 
     public List<User> getUserFollowers(Long userId) throws IOException {
         String id = userId != null ? Long.toString(userId) : "me";
         TypeToken<List<User>> type = new TypeToken<List<User>>() {};
         return get("users/" + id + "/followers", type.getType());
+        //return get("users", type.getType());
 
     }
 
@@ -138,10 +140,6 @@ public class ApiClient {
         Message message = new Message();
         message.text = text;
         return post("messages", message, Message.class);
-    }
-
-    public User getAuthUser() throws IOException {
-        return get("users/me", User.class);
     }
 
     public User setFollowing(Long following_id, boolean follow) throws IOException {

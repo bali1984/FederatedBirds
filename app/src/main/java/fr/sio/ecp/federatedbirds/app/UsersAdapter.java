@@ -30,11 +30,6 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.MessageViewH
 
     private List<User> mUsers;
 
-
-    private static final String USERID_KEY = "user_id";
-    private static final String USERNAME_KEY = "user_name";
-    private static final String USERAVATAR_KEY = "user_avatar";
-
     public void setUsers(List<User> users) {
         mUsers = users;
         notifyDataSetChanged();
@@ -65,7 +60,7 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.MessageViewH
 
         holder.mUsernameView.setText(user.login);
 
-        holder.mFollow.setOnClickListener(new View.OnClickListener() {
+        holder.mFollowButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 AsyncTaskCompat.executeParallel(
@@ -75,13 +70,13 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.MessageViewH
             }
         });
 
-        holder.mUnfollow.setOnClickListener(new View.OnClickListener() {
+        holder.mUnfollowButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View w) {
                 AsyncTaskCompat.executeParallel(
-                        new SetFollowingTask(v.getContext(), user_id, false)
+                        new SetFollowingTask(w.getContext(), user_id, false)
                 );
-                Toast.makeText(v.getContext(), R.string.unfollow_ok, Toast.LENGTH_SHORT).show();
+                Toast.makeText(w.getContext(), R.string.unfollow_ok, Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -90,15 +85,15 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.MessageViewH
 
         private ImageView mAvatarView;
         private TextView mUsernameView;
-        private Button mFollow;
-        private Button mUnfollow;
+        private Button mFollowButton;
+        private Button mUnfollowButton;
 
         public MessageViewHolder(View itemView) {
             super(itemView);
             mAvatarView = (ImageView) itemView.findViewById(R.id.avatar);
             mUsernameView = (TextView) itemView.findViewById(R.id.username);
-            mFollow = (Button) itemView.findViewById(R.id.follow);
-            mUnfollow = (Button) itemView.findViewById(R.id.unfollow);
+            mFollowButton = (Button) itemView.findViewById(R.id.follow);
+            mUnfollowButton = (Button) itemView.findViewById(R.id.unfollow);
         }
     }
 

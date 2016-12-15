@@ -17,6 +17,7 @@
     <string name="logout">Déconnexion</string>
     <string name="login_progress">Connexion en cours</string>
     <string name="register_progress">Enregistrement en cours</string>
+    <string name="cancelRegistration">Annuler</string>
     <string name="followed">Abonnements</string>
     <string name="followers">Abonnés</string>
     <string name="new_message">Nouveau message</string>
